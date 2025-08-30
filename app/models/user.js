@@ -13,4 +13,12 @@ const User = sequelize.define('User', {
   },
 });
 
+// Define the relationship with URLs
+User.associate = (models) => {
+  User.hasMany(models.Url, {
+    foreignKey: 'userId',
+    as: 'urls'
+  });
+};
+
 module.exports = User;

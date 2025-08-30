@@ -18,7 +18,13 @@ app.use(morgan('dev'));
 app.use('/api/auth', authRoutes);
 app.use('/api/url', urlRoutes);
 
-sequelize.sync().then(() => {
+// Add the redirect route at root level
+const urlController = require('./controller/urlController');
+app.get('/:short', urlController.redirectShortUrl);
+
+// Force sync in development mode only - this will drop and recreate all tables
+sequelize.sync({ force: true }).then(() => {
+  console.log('Database synchronized');
   app.listen(port, () => {
     console.log(`Server running on port ${port}`);
   });
