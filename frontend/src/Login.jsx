@@ -43,6 +43,7 @@ export default function Login({ setToken }) {
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
+
         });
         setTimeout(() => navigate('/shorten'), 1000);
       } else {
